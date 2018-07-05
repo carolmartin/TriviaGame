@@ -1,0 +1,72 @@
+/* Stylesheet for Triva Game 
+*/
+
+.header{
+    background-color: aqua;
+    color: crimson;
+    
+}
+.container{
+    background-color: lightblue;
+}
+.Trivia-Question {
+        margin-top: 40px;
+        height: 500px;
+        width: 220px;
+        margin-left: 60px;
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 12px;
+}
+#answer1 {
+    color: black;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 12px;
+}
+#answer2 {
+    color: black;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 12px;
+}
+#answer2 {
+    color: black;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 12px;
+}
+
+#FifthGraderImage {
+    width: 200px;
+    height: 200px;
+    border-style: solid;
+    padding: 4px;
+    float: left;
+    margin: 4px;
+}
+#display {
+    font-family: monospace;
+    font-size: 60px;
+    color: green;
+  
+    /* Typography */
+    text-align: center;
+  
+    /* Visual */
+    background: black;
+  }
+
+/* #images {
+        padding-top: 60px;
+}
+
+#buttons {
+        padding-top: 60px;
+}
+
+.Trivia-Question {
+        width: 60px;
+        height: 60px;
+        border-style: solid;
+        padding: 4px;
+        float: left;
+        margin: 2px;
+} 
+*/

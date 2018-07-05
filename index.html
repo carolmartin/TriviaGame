@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Are you Smarter than a 5th Grader?</title>
+
+    <!-- Add link for external CSS -->
+    <link rel="stylesheet" href="assets/css/style.css">
+
+    <!-- Added link to the JQuery Library  -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+    <!-- Added a link to Bootstrap -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+
+</head>
+
+<body>
+    <header>
+
+        <h1>Are you Smarter than a 5th Grader?</h1>
+        <h2>Press start and answer all questions before the time runs out!</h2>
+        <div id="Fifthgraderimage"></div>
+
+        <div id="display">00:00</div>
+
+    </header>
+
+
+    <!-- Bootstrap Enhanced Buttons -->
+    <button class="btn btn-primary btn-lg startBtn">Start</button>
+    <button class="btn btn-primary btn-lg stopBtn">Stop</button>
+
+    <div class="container">
+
+        <section id="Trivia-Question">
+            <h1>Question:
+                <span id="question"></span>
+            </h1>
+            <h2>
+                <span id="answer1"></span>
+            </h2>
+            <h2>
+                <span id="answer2"></span>
+            </h2>
+            <h2>
+                <span id="answer3"></span>
+            </h2>
+        </section>
+
+    </div>
+    
+    <!-- Script -->
+    <script type="text/javascript" src="assets/javascript/app.js"></script>
+
+</body>
+
+</html>
