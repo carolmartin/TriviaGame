@@ -33,7 +33,7 @@
     font-size: 12px;
 }
 
-#FifthGraderImage {
+#fifthGraderImage {
     width: 200px;
     height: 200px;
     border-style: solid;
@@ -60,6 +60,8 @@
 #buttons {
         padding-top: 60px;
 }
+
+#quiz.hide
 
 .Trivia-Question {
         width: 60px;

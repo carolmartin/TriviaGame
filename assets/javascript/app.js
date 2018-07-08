@@ -1,108 +1,80 @@
 // Trivia GAME Logic
 // =============================
 
-// This code will run as soon as the page loads
-window.onload = function () {
-  $("#start").on("click", trivia.start);
-  $("#stop").on("click", trivia.stop);
 
-};
+
+//Seem's like the window.onload is not working.. Added this code
+window.onload = function () {
+  $("#quiz").hide();
+}
+
+$("#startBtn").on("click", function () {
+  console.log("startBtn click");
+  $("#quiz").show();
+  startTimer();
+
+  // displayQuestions();
+});
+$("#stopBtn").on("click", function () {
+  stopTimer();
+});
+
 
 //  Variable that will hold our setInterval that runs the timer
 var intervalId;
-// const myQuestions = [
-//   {
-//     question: "Who is the strongest?",
-//     answers: {
-//       a: "Superman",
-//       b: "The Terminator",
-//       c: "Waluigi, obviously"
-//     },
-//     correctAnswer: "c"
-//   },
-//   {
-//     question: "What is the best site ever created?",
-//     answers: {
-//       a: "SitePoint",
-//       b: "Simple Steps Code",
-//       c: "Trick question; they're both the best"
-//     },
-//     correctAnswer: "c"
-//   },
-const MyQuestions = [
-  {
-    question: "What are words that sound the same but have different meanings?",
-    answers: {
-      a: "Homophones",
-      b: "Superlatives",
-      c: "Endonyms"
-    },
-    correctAnswer: "a"
-  },
-  {
-    question: "Which one of the following is the best conductor of electicity?",
-    answers: {
-      a: "Silver",
-      b: "Rubber",
-      c: "Wood"
-    },
-    correctAnswer: "a"
-  },
-  {
-    question: "When a number is halfway between two numbers, how do you round?",
-    answers: {
-      a: "down",
-      b: "up",
-      c: "either up or down"
-    },
-    correctAnswer: "b"
-  },
-  {
-    question: "The war of 1812 was fought between the United States and what country?",
-    answers: {
-      a: "France",
-      b: "Germany",
-      c: "England"
-    },
-    correctAnswer: "c"
-  },
-  {
-    question: "Name the chemical that makes plant leaves green?",
-    answers: {
-      a: "Chlorophyl",
-      b: "Oxygen",
-      c: "Hydrogen"
-    },
-    correctAnswer: "a"
-  }
-] 
+
+
+var i = 30;
+//Set countWins.
+var countWins = 0;
+var countLosses = 0;
+
+function startTimer() {
+
+  console.log("startTimer function");
+
+  var countdownTimer = setInterval(function () {
+
+    console.log(i);
+    i = i - 1;
+
+
+    if (i <= 0) {
+      clearInterval(countdownTimer);
+      CalculateWins();
+      return;
+    }
+    else {
+      /* #display ??? follow stopwatch code?*/
+      timer.start();
+    }
+
+  }, 1000);
+
+}
 
 
 // prevents the clock from being sped up unnecessarily
 var clockRunning = false;
 
-// Our stopwatch object
-var stopwatch = {
+// Our timer object
+var timer = {
 
-  time: 0,
-  lap: 1,
-
+  time: 30,
   reset: function () {
 
-    stopwatch.time = 0;
-    stopwatch.lap = 1;
+    timer.time = 30;
 
-    // DONE: Change the "display" div to "00:00."
-    $("#display").text("00:00");
+    // DONE: Change the "display" div to "00:30."
+    $("#display").text("00:30");
 
-    // DONE: Empty the "laps" div.
-    $("#laps").text("");
   },
   start: function () {
 
     // DONE: Use setInterval to start the count here and set the clock to running.
     if (!clockRunning) {
-      intervalId = setInterval(stopwatch.count, 1000);
+      console.log("clock running");
+      intervalId = setInterval(timer.count, 1000);
       clockRunning = true;
     }
   },
@@ -110,28 +82,23 @@ var stopwatch = {
 
     // DONE: Use clearInterval to stop the count here and set the clock to not be running.
     clearInterval(intervalId);
+    console.log("in stop function");
     clockRunning = false;
+
   },
-  recordLap: function () {
 
-    // DONE: Get the current time, pass that into the stopwatch.timeConverter function,
-    //       and save the result in a variable.
-    var converted = stopwatch.timeConverter(stopwatch.time);
-
-    // DONE: Add the current lap and time to the "laps" div.
-    $("#laps").append("<p>Lap " + stopwatch.lap + " : " + converted + "</p>");
-
-    // DONE: Increment lap by 1. Remember, we can't use "this" here.
-    stopwatch.lap++;
-  },
   count: function () {
 
-    // DONE: increment time by 1, remember we cant use "this" here.
-    stopwatch.time++;
+    // DONE: deincrement time by 1, remember we cant use "this" here.
+    timer.time--;
+    if (timer.time < 0) {
 
-    // DONE: Get the current time, pass that into the stopwatch.timeConverter function,
+      return
+    }
+
+    // DONE: Get the current time, pass that into the timer.timeConverter function,
     //       and save the result in a variable.
-    var converted = stopwatch.timeConverter(stopwatch.time);
+    var converted = timer.timeConverter(timer.time);
     console.log(converted);
 
     // DONE: Use the variable we just created to show the converted time in the "display" div.
@@ -157,63 +124,79 @@ var stopwatch = {
   }
 };
 
+function CalculateWins() {
+  console.log("CalculateWins");
+  var correctAnswer = "";
 
-// Solution if you choose not to put it in an object
+  //Load the array radios with all question1 answers
 
-// var time = 0;
-// var lap = 1;
-// function reset() {
+  var radios = document.getElementsByName('question1');
+  console.log(radios);
+  correctAnswer = "homophones";
+  // Call checkRadioBtn passing question 1 radio button answers and the correct answer
+  checkRadioBtn(radios, correctAnswer);
 
-//   time = 0;
-//   lap = 1;
 
-//   $("#display").text("00:00");
-//   $("#laps").text("");
+  //Load the array radios with all question2 answers
 
-// }
+  var radios = document.getElementsByName('question2');
+  console.log(radios);
+  correctAnswer = "silver";
+  //Call checkRadioBtn passing question 2 radio button answers and the correct answer
+  checkRadioBtn(radios, correctAnswer);
 
-// function start() {
-//   intervalId = setInterval(count, 1000);
-// }
 
-// function stop() {
+  //Load the array radios with all question3 answers
 
-//   console.log("stopping");
-//   clearInterval(intervalId);
+  var radios = document.getElementsByName('question3');
+  console.log(radios);
+  correctAnswer = "up";
+  //Call checkRadioBtn passing question 3 radio button answers and the correct answer
+  checkRadioBtn(radios, correctAnswer);
 
-// }
+  //Load the array radios with all question4 answers
 
-// function recordLap() {
+  var radios = document.getElementsByName('question4');
+  console.log(radios);
+  correctAnswer = "england";
+  //Call checkRadioBtn passing question 4 radio button answers and the correct answer
+  checkRadioBtn(radios, correctAnswer);
 
-//   var converted = timeConverter(time);
-//   $("#laps").append("<p>Lap " + lap + " : " + converted + "</p>");
-//   lap++;
+  //Load the array radios with all question5 answers
 
-// }
+  var radios = document.getElementsByName('question5');
+  console.log(radios);
+  correctAnswer = "chlorophyl";
+  //Call checkRadioBtn passing question 5 radio button answers and the correct answer
+  checkRadioBtn(radios, correctAnswer);
 
-// function count() {
+};
 
-//   time++;
-//   var converted = timeConverter(time);
-//   $("#display").text(converted);
+function checkRadioBtn(radios, correctAnswer) {
+  // Loop through all question  answers looking for the checked item
+  // Check if the value of the selected item is the correct or incorrect answer and add to counts
+  for (var i = 0; i < radios.length; i++) {
 
-// }
+    // find the checked radio button 
+    if (radios[i].checked) {
+      var answerValue = radios[i].value;
 
-// function timeConverter(t) {
+      console.log("in Calculate Wins :" + radios[i].value);
 
-//   var minutes = Math.floor(t / 60);
-//   var seconds = t - (minutes * 60);
+      // if the selected radio button value is correct, add to countWins
+      if (radios[i].value === correctAnswer) {
+        countWins++;
+        console.log("countWins: " + countWins);
+      }
 
-//   if (seconds < 10) {
-//     seconds = "0" + seconds;
-//   }
+      else {
+        // otherwise add to countLosses
+        countLosses++;
+        console.log("countLosses: " + countLosses);
+      }
 
-//   if (minutes === 0) {
-//     minutes = "00";
-//   }
-//   else if (minutes < 10) {
-//     minutes = "0" + minutes;
-//   }
+    }
+  }
 
-//   return minutes + ":" + seconds;
-// }
+}
+
