@@ -25,6 +25,7 @@
         <h1>Are you Smarter than a 5th Grader?</h1>
         <h2>Press start and answer all questions before the time runs out!</h2>
         <div id="fifthgGraderImage"></div>
+        <img src="assets/images/smarterThanAFifthGrader.jpg" alt="Smarter than a 5th Grader">
 
         <div id="display">00:30</div>
 
@@ -70,8 +71,18 @@
             <input type="radio" id="mc" name="question5" value="oxygen">Oxygen<br>
             <input type="radio" id="mc" name="question5" value=""hydrogen"">Hydrogen<br>
             
+            <button class="btn btn-primary btn-lg DoneBtn" id="DoneBtn">Done</button>
 
         </form>
+        
+        <div id=results name="results">
+            <br>
+            <p id="correct">Correct Answers: </p>
+            <p id="incorrect"> Incorrect Answers: </p>
+            <p id="unanswered">Unanswered questions: </p>
+            <p id="remainingTime">Remaining time: </p>
+
+        </div>
 
         
     </div>

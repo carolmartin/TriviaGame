@@ -6,6 +6,7 @@
 //Seem's like the window.onload is not working.. Added this code
 window.onload = function () {
   $("#quiz").hide();
+  $("#results").hide();
 }
 
 $("#startBtn").on("click", function () {
@@ -16,7 +17,7 @@ $("#startBtn").on("click", function () {
   // displayQuestions();
 });
 $("#stopBtn").on("click", function () {
-  stopTimer();
+  timer.stop();
 });
 
 
@@ -24,10 +25,12 @@ $("#stopBtn").on("click", function () {
 var intervalId;
 
 
-var i = 30;
+var i = 15;
 //Set countWins.
-var countWins = 0;
-var countLosses = 0;
+var countCorrect = 0;
+var countIncorrect = 0;
+var countNotAnswered = 0;
+var remainingTime;
 
 function startTimer() {
 
@@ -60,13 +63,13 @@ var clockRunning = false;
 // Our timer object
 var timer = {
 
-  time: 30,
+  time: 15,
   reset: function () {
 
-    timer.time = 30;
+    timer.time = 15;
 
     // DONE: Change the "display" div to "00:30."
-    $("#display").text("00:30");
+    $("#display").text("00:15");
 
   },
   start: function () {
@@ -79,11 +82,17 @@ var timer = {
     }
   },
   stop: function () {
+    console.log("in timer.stop");
 
     // DONE: Use clearInterval to stop the count here and set the clock to not be running.
     clearInterval(intervalId);
     console.log("in stop function");
     clockRunning = false;
+    remainingTime = timer.timeConverter(timer.time);
+    console.log("remaining time: " + remainingTime);
+    displayCounts();
+// Added return just now to see if will stop clock and processing? didn't work...
+    return;
 
   },
 
@@ -92,6 +101,8 @@ var timer = {
     // DONE: deincrement time by 1, remember we cant use "this" here.
     timer.time--;
     if (timer.time < 0) {
+      remainingTime = 0;
+      displayCounts();
 
       return
     }
@@ -145,7 +156,6 @@ function CalculateWins() {
   //Call checkRadioBtn passing question 2 radio button answers and the correct answer
   checkRadioBtn(radios, correctAnswer);
 
-
   //Load the array radios with all question3 answers
 
   var radios = document.getElementsByName('question3');
@@ -175,28 +185,49 @@ function CalculateWins() {
 function checkRadioBtn(radios, correctAnswer) {
   // Loop through all question  answers looking for the checked item
   // Check if the value of the selected item is the correct or incorrect answer and add to counts
+  var questionAnswered = false;
   for (var i = 0; i < radios.length; i++) {
 
     // find the checked radio button 
     if (radios[i].checked) {
-      var answerValue = radios[i].value;
+      questionAnswered = true;
+      answerValue = radios[i].value;
 
       console.log("in Calculate Wins :" + radios[i].value);
 
       // if the selected radio button value is correct, add to countWins
       if (radios[i].value === correctAnswer) {
-        countWins++;
-        console.log("countWins: " + countWins);
+        countCorrect++;
+        console.log("countCorrect: " + countCorrect);
       }
 
       else {
         // otherwise add to countLosses
-        countLosses++;
-        console.log("countLosses: " + countLosses);
+        countIncorrect++;
+        console.log("countIncorrect: " + countIncorrect);
       }
 
     }
   }
+  //If no anwer was selected for this question, updated unanswered count
+  if (!questionAnswered){
+    countNotAnswered++;
+    console.log("notAnswered: " + countNotAnswered);
+  }
 
+}
+
+function displayCounts(){
+  //Hide the Quiz form that that shows the questions and answers
+  $("#quiz").hide();
+
+  // Update the Correct, incorrect and unanswered  counts and show
+  $("#correct").text("Correct Answers: " + countCorrect);
+  $("#incorrect").text("Incorrect Answers: " + countIncorrect);
+  $("#unanswered").text("Unanswered: " + countNotAnswered);
+  $("remainingTime").text("Remaining time: " + remainingTime);
+
+  $("#results").show();
+  
 }
 
