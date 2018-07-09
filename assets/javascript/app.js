@@ -7,54 +7,27 @@
 window.onload = function () {
   $("#quiz").hide();
   $("#results").hide();
+  $("#startBtn").on("click", timer.start);
+  $("#stopBtn").on("click", timer.stop);
+
 }
 
-$("#startBtn").on("click", function () {
-  console.log("startBtn click");
-  $("#quiz").show();
-  startTimer();
 
-  // displayQuestions();
-});
-$("#stopBtn").on("click", function () {
-  timer.stop();
-});
+// $("#doneBtn").on("click", function () {
+//   timer.stop;
+// });
 
 
 //  Variable that will hold our setInterval that runs the timer
 var intervalId;
 
 
-var i = 15;
-//Set countWins.
+var i = 30;
+//Set counts to be displayed on the page for correct, incorrect and unanswered 
 var countCorrect = 0;
 var countIncorrect = 0;
 var countNotAnswered = 0;
 var remainingTime;
-
-function startTimer() {
-
-  console.log("startTimer function");
-
-  var countdownTimer = setInterval(function () {
-
-    console.log(i);
-    i = i - 1;
-
-
-    if (i <= 0) {
-      clearInterval(countdownTimer);
-      CalculateWins();
-      return;
-    }
-    else {
-      /* #display ??? follow stopwatch code?*/
-      timer.start();
-    }
-
-  }, 1000);
-
-}
 
 
 // prevents the clock from being sped up unnecessarily
@@ -63,20 +36,21 @@ var clockRunning = false;
 // Our timer object
 var timer = {
 
-  time: 15,
-  reset: function () {
+  time: 30,
+  // reset: function () {
 
-    timer.time = 15;
+  //   timer.time = 30;
 
-    // DONE: Change the "display" div to "00:30."
-    $("#display").text("00:15");
+  //   //Change the "display" div to "00:30."
+  //   $("#display").text("00:30");
 
-  },
+  // },
   start: function () {
 
     // DONE: Use setInterval to start the count here and set the clock to running.
     if (!clockRunning) {
       console.log("clock running");
+      $("#quiz").show();
       intervalId = setInterval(timer.count, 1000);
       clockRunning = true;
     }
@@ -90,30 +64,28 @@ var timer = {
     clockRunning = false;
     remainingTime = timer.timeConverter(timer.time);
     console.log("remaining time: " + remainingTime);
+    // Calculate correct, incorrect, and unanswered questions and display
+    CalculateWins();
     displayCounts();
-// Added return just now to see if will stop clock and processing? didn't work...
-    return;
-
   },
 
   count: function () {
 
-    // DONE: deincrement time by 1, remember we cant use "this" here.
+    // decrement time by 1, remember we cant use "this" here.
+    console.log("in count function timer is : " + timer.time);
     timer.time--;
-    if (timer.time < 0) {
-      remainingTime = 0;
-      displayCounts();
 
-      return
-    }
-
-    // DONE: Get the current time, pass that into the timer.timeConverter function,
-    //       and save the result in a variable.
+    // Get the current time, pass that into the timer.timeConverter function,
+    // and save the result in a variable.
     var converted = timer.timeConverter(timer.time);
     console.log(converted);
 
-    // DONE: Use the variable we just created to show the converted time in the "display" div.
+    // Use the variable we just created to show the converted time in the "display" div.
     $("#display").text(converted);
+
+    if (timer.time <= 0) {
+      timer.stop;
+    }
   },
   timeConverter: function (t) {
 
@@ -134,6 +106,8 @@ var timer = {
     return minutes + ":" + seconds;
   }
 };
+
+$("#doneBtn").on("click", timer.stop);
 
 function CalculateWins() {
   console.log("CalculateWins");
@@ -210,14 +184,14 @@ function checkRadioBtn(radios, correctAnswer) {
     }
   }
   //If no anwer was selected for this question, updated unanswered count
-  if (!questionAnswered){
+  if (!questionAnswered) {
     countNotAnswered++;
     console.log("notAnswered: " + countNotAnswered);
   }
 
 }
 
-function displayCounts(){
+function displayCounts() {
   //Hide the Quiz form that that shows the questions and answers
   $("#quiz").hide();
 
@@ -225,9 +199,9 @@ function displayCounts(){
   $("#correct").text("Correct Answers: " + countCorrect);
   $("#incorrect").text("Incorrect Answers: " + countIncorrect);
   $("#unanswered").text("Unanswered: " + countNotAnswered);
-  $("remainingTime").text("Remaining time: " + remainingTime);
+  $("#remainingTime").text("Remaining time: " + remainingTime);
 
   $("#results").show();
-  
+
 }
 
