@@ -3,19 +3,19 @@
 
 
 
-//Seem's like the window.onload is not working.. Added this code
+// Window Load logic
 window.onload = function () {
   $("#quiz").hide();
   $("#results").hide();
   $("#startBtn").on("click", timer.start);
   $("#stopBtn").on("click", timer.stop);
-
+  $("#doneBtn").on("click", function () {
+    timer.stop;
+  });
 }
 
 
-// $("#doneBtn").on("click", function () {
-//   timer.stop;
-// });
+
 
 
 //  Variable that will hold our setInterval that runs the timer
@@ -49,8 +49,13 @@ var timer = {
 
     // DONE: Use setInterval to start the count here and set the clock to running.
     if (!clockRunning) {
+      countCorrect = 0;
+      countIncorrect = 0;
+      countNotAnswered = 0;
+      timer.time = 30;
       console.log("clock running");
       $("#quiz").show();
+      $("#results").hide();
       intervalId = setInterval(timer.count, 1000);
       clockRunning = true;
     }

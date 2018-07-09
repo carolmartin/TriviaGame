@@ -41,40 +41,42 @@
         <form id=quiz name="quiz">
             <br>
             <p>1. What are words that sound the same but have different meanings?</p>
-            <input type="radio" id="mc" name="question1" value="homophones">Homophones<br>
-            <input type="radio" id="mc" name="question1" value="superlatives">Superlatives<br>
-            <input type="radio" id="mc" name="question1" value="endonyms">Endonyms<br>
+            <input type="radio"  name="question1" value="homophones">Homophones<br>
+            <input type="radio"  name="question1" value="superlatives">Superlatives<br>
+            <input type="radio"  name="question1" value="endonyms">Endonyms<br>
             <br>
 
             <p>2. Which one of the following is the best conductor of electicity?</p>
-            <input type="radio" id="mc" name="question2" value="silver">Silver<br>
-            <input type="radio" id="mc" name="question2" value="rubber">Rubber<br>
-            <input type="radio" id="mc" name="question2" value="wood">Wood<br>
+            <input type="radio" name="question2" value="silver">Silver<br>
+            <input type="radio" name="question2" value="rubber">Rubber<br>
+            <input type="radio" name="question2" value="wood">Wood<br>
             <br>
 
             <p>3. When a number is halfway between two numbers, how do you round?</p>
-            <input type="radio" id="mc" name="question3" value="up">Up<br>
-            <input type="radio" id="mc" name="question3" value="down">Down<br>
-            <input type="radio" id="mc" name="question3" value="wood">Either up or down<br>
+            <input type="radio" name="question3" value="up">Up<br>
+            <input type="radio" name="question3" value="down">Down<br>
+            <input type="radio" name="question3" value="wood">Either up or down<br>
 
             <br>
 
             <p>4. The war of 1812 was fought between the United States and what country?</p>
-            <input type="radio" id="mc" name="question4" value="france">France<br>
-            <input type="radio" id="mc" name="question4" value="england">England<br>
-            <input type="radio" id="mc" name="question4" value="germany">Germany<br>
+            <input type="radio" name="question4" value="france">France<br>
+            <input type="radio" name="question4" value="england">England<br>
+            <input type="radio" name="question4" value="germany">Germany<br>
             
             <br>
 
             <p>5. Name the chemical that makes plant leaves green?</p>
-            <input type="radio" id="mc" name="question5" value="chlorphyl">Chlorophyl<br>
-            <input type="radio" id="mc" name="question5" value="oxygen">Oxygen<br>
-            <input type="radio" id="mc" name="question5" value=""hydrogen"">Hydrogen<br>
+            <input type="radio" name="question5" value="chlorphyl">Chlorophyl<br>
+            <input type="radio" name="question5" value="oxygen">Oxygen<br>
+            <input type="radio" name="question5" value=""hydrogen"">Hydrogen<br>
             
-            <!-- <button class="btn btn-primary btn-lg doneBtn" id="doneBtn">Done</button> -->
+            
 
         </form>
+        <!-- Moved doneBtn outside of form as was not recognizing onclick until out of form -->
         
+        <button class="btn btn-primary btn-lg doneBtn" id="doneBtn">Done</button>
         <div id=results name="results">
             <br>
             <p id="correct">Correct Answers: </p>
